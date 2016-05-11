@@ -1,4 +1,5 @@
 import React from 'react';
+import Player from './Player';
 
 class Counter extends React.Component {
   constructor(){
