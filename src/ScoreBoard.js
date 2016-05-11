@@ -1,5 +1,6 @@
 import React from 'react';
 import Player from './Player';
+import AddPlayer from './AddPlayer';
 
 class ScoreBoard extends React.Component {
   constructor(){
@@ -47,8 +48,17 @@ class ScoreBoard extends React.Component {
              onChange={this.onChangeScore.bind(this)} />;
      }
 
+  onAddPlayer(username){
+         var newPlayer = { name: username, score: 0 };
+         var newPlayers = this.state.players.concat(newPlayer);
+         this.setState({
+             players: newPlayers
+         });
+     }
+
     render() {
         return (
+          <div>
             <table>
                 <thead>
                   <tr>
@@ -57,16 +67,17 @@ class ScoreBoard extends React.Component {
                     <td>+1</td>
                   </tr>
                 </thead>
-                <tbody>
-                  {this.state.players.map(this.renderPlayer.bind(this))}
-              </tbody>
-              <tfoot>
-                <tr colSpan="3">
+                  <tbody>
+                    {this.state.players.map(this.renderPlayer.bind(this))}
+                  </tbody>
+                <tfoot>
+                  <tr colSpan="3">
                   <td>{this.state.message}</td>
-                </tr>
-            </tfoot>
-
-            </table>
+                  </tr>
+                </tfoot>
+          </table>
+            <AddPlayer onSubmit={this.onAddPlayer.bind(this)} />
+        </div>
 
         );
     }
