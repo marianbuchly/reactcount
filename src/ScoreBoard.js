@@ -6,7 +6,12 @@ class ScoreBoard extends React.Component {
       super();
 
       this.state = {
-          message: "There are no scores yet."
+          message: "There are no scores yet.",
+          players: [
+               { name: "Benjamin", score: 0},
+               { name: "Wouter", score: 0 },
+               { name: "Rory", score: 0 }
+            ]
       };
   }
 
@@ -15,6 +20,13 @@ class ScoreBoard extends React.Component {
           message: name + " scored and has " + score + " points."
       });
   }
+
+  renderPlayer(player){
+         return <Player
+             name={player.name}
+             score={player.score}
+             onChange={this.onChangeScore.bind(this)} />;
+     }
 
     render() {
         return (
@@ -27,9 +39,7 @@ class ScoreBoard extends React.Component {
                   </tr>
                 </thead>
                 <tbody>
-                  <Player name="Benjamin" onChange={this.onChangeScore.bind(this)} />
-                  <Player name="Wouter" onChange={this.onChangeScore.bind(this)} />
-                  <Player name="Rory" onChange={this.onChangeScore.bind(this)} />
+                  {this.state.players.map(this.renderPlayer.bind(this))}
               </tbody>
               <tfoot>
                 <tr colSpan="3">
