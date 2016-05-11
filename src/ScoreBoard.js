@@ -8,16 +8,35 @@ class ScoreBoard extends React.Component {
       this.state = {
           message: "There are no scores yet.",
           players: [
-               { name: "Benjamin", score: 0},
-               { name: "Wouter", score: 0 },
-               { name: "Rory", score: 0 }
+                { name: "Marian", score: 0},
+                { name: "Nora", score: 0},
+                { name: "Aggie", score: 0},
+                { name: "Rogier", score: 0},
+                { name: "Laurence", score: 0},
+                { name: "Brian", score: 0},
+                { name: "Benjamin", score: 0},
+                { name: "Wouter", score: 0 },
+                { name: "Rory", score: 0 }
             ]
       };
   }
 
   onChangeScore(name, score){
+      var oldPlayers = this.state.players;
+      var newPlayers = oldPlayers.map(function(player){
+          if(player.name == name){
+                return {
+                    name: player.name,
+                    score: score
+                }
+            }
+
+            return player;
+        });
+
       this.setState({
-          message: name + " scored and has " + score + " points."
+          message: name + " scored and has " + score + " points.",
+          players: newPlayers
       });
   }
 
